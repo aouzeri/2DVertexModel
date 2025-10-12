@@ -11,9 +11,9 @@ for cellID = 1:celldata.nCells
     
     Acell          = celldata.A(cellID);
     Pcell          = celldata.P(cellID);
+    A0             = celldata.A0;
     p0             = param.p0;
     rstiff         = param.rstiff;
-    ka             = param.ka;
     vertexcoordsold   = celldata.r;
     Lx                = param.Lx;
     Ly                = param.Ly;
@@ -52,7 +52,7 @@ for cellID = 1:celldata.nCells
         % Derivative of the area with next vertex and the pericenter (2 by 1)
         dA    = getAreaDerivative(vertexcoords,vertices,currVert,nextVert,prevVert);
         
-        if ismember(cellID,param.SelfPropellingCellIDs)
+        if ismember(cellID,param.cellIDstoTrack) && strcmp("propulsion",param.case)
             Theta =  param.meanPropulsionAngle(1) + randn(1);
             polarityVector = [cos(Theta),sin(Theta)];
             % distribute the force among all vertices (the greater the
@@ -65,7 +65,7 @@ for cellID = 1:celldata.nCells
         
         % Adding contributions from a cell to its vertices
         fcell(currVert,:) = fcell(currVert,:) - ...
-            ka *2.0 * (Acell - 1) * dA - 2.0/rstiff * (Pcell - p0) * dPeri + selfPropulsionForce;
+            2.0 * (Acell/A0 - 1) * dA/A0 - 2.0/rstiff * (Pcell/sqrt(A0) - p0) * dPeri /sqrt(A0) + selfPropulsionForce;
         
         
     end

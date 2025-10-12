@@ -121,6 +121,14 @@ celldata.A                      = getCellAreas(celldata,param);
 celldata.Ainit                  = celldata.A; % Initial cell areas
 celldata.verttocell             = getVertexToCellIDMap(celldata.nMasterVertices,nCells,celldata.connec);
 
+% get prefered cell area and perimeter as the average of all cell areas and
+% perimeters
+celldata.A0 = 0.0;
+celldata.P0 = 0.0;
+for cellID = 1:nCells
+    celldata.A0 = celldata.A0 + celldata.A(cellID)/nCells;
+    celldata.P0 = celldata.P0 + celldata.P(cellID)/nCells;
+end
 
 %% Obtaing boundary nodes
 % Creating a map of the slaves (images) that have been removed
@@ -138,7 +146,7 @@ celldata = boundaryVertices(celldata,param);
 
 %% Plotting mesh with cell IDs
 figure(1);
-[Cnew, Vnew] = getCellDataforPlottingwithoutPeriJumps(nCells, celldata.r, celldata.connec, param);
+[Cnew, Vnew] = getCellDataforPlottingwithoutPeriodicJumps(nCells, celldata.r, celldata.connec, param);
 for cellID = 1:length(closedPolygonsID)
     patch('faces',Cnew{cellID},'vertices',Vnew , ...
         'facecolor','flat','edgecolor',[.2,.2,.2],'CData',cellID)  ;
@@ -157,9 +165,9 @@ pause(0.1)
 % celldata.augmentedConnec  = SlaveToMasterCellMap;
 % [~,celldata.augmentedEdgeData] = getCellPerimeters(nCells,[masterVsubset;slaveVSubset],SlaveToMasterCellMap,param,1);
 % celldata.augmentedverttocell             = getVertexToCellIDMap(celldata.nAllvertices,nCells,celldata.augmentedConnec);
-
-
-
+% 
+% 
+% 
 % % Plotting network of vertices
 % figure(10); hold on;
 % rectangle('Position',[lboundary(1) wboundary(1) (lboundary(2) - lboundary(1)) (wboundary(2) - wboundary(1))])

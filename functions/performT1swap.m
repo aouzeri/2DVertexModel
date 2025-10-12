@@ -5,14 +5,6 @@ function [coordinates, connectivity, edgedata,verttocell] = performT1swap(cellID
 Pos1 = coordinates(node1,:);
 Pos2 = coordinates(node2,:);
 
-% First we separate the two nodes further away from the threshold
-vec = Pos2 - Pos1;
-newPos1 = Pos1 - 0.52*param.T1_TOL*vec/norm(vec);
-newPos2 = Pos2 + 0.52*param.T1_TOL*vec/norm(vec);
-coordinates(node1,:) = newPos1;
-coordinates(node2,:) = newPos2;
-normNewvec = norm(newPos2 - newPos1);
-
 % Cell 1 (remove node2)
 if cellID1 ~= -1
     vertices = connectivity{cellID1};

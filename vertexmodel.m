@@ -1,7 +1,9 @@
 %% Vertex modelling of planar sheets
 %
+% Authors Adam Ouzeri, Sohan Kale
+%
 % This script simulates a simple vertex model whose dynamics is governed by
-% the minisation of a mechanical energy functional and nodal dissipation
+% the minisation of an energy functional and nodal dissipation
 % forces. The models allows for tissue fluidization, T1 topological
 % transitions, cellular contraction, stretching of the tissue and
 % self-propulsion of individual cells. 
@@ -19,9 +21,8 @@
 %   - Farhadifar et al. 2007 (https://doi.org/10.1016/j.cub.2007.11.049)
 %   - Staple et al. 2010 (https://doi.org/10.1140/epje/i2010-10677-0)
 %   - Bi et al. 2015 (https://doi.org/10.1038/nphys3471)
-%   - Fletcher et al. 2013 (http://dx.doi.org/10.1016/j.pbiomolbio.2013.09.003)
+%   - Fletcher et al. 2014 (http://dx.doi.org/10.1016/j.bpj.2013.11.4498)
 %  
-% Copyright: (C) Adam Ouzeri - Sohan Kale | 2019-2024
 
 addpath('./functions')
 
@@ -37,13 +38,13 @@ param.Lx       = 10;                 % box length in x
 param.Ly       = 10;                 % box length in y
 
 %%% Choose tissue fluidity (comment unwanted)
-Tissue_fluidity = 'fluid';
-% Tissue_fluidity = 'solid';
+Tissue_state = 'fluid';
+% Tissue_state = 'solid';
 
 %%% Choose a scenario (comment unwanted)
-Case = "propulsion"; % self-propelled cell
-% Case = "contraction"; % contracting a single cell
-% Case = "stretching"; % stretching tissue
+param.case = "propulsion"; % self-propelled cell
+% param.case = "contraction"; % contracting a single cell
+%param.case = "stretching"; % stretching tissue
 
 %% 2 - Setting all parameters
 parameters;
