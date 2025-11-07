@@ -8,11 +8,11 @@ param.nT1      = 0;         % to store the number of T1 transitions occured
 % simulation time parameters
 param.deltat   = 0.01;     % initial timestep
 param.Tsim     = 0;         % simulation time
-param.Nsteps   = 10000;       % simulation time
+param.Nsteps   = 100;       % simulation time
 param.isBoundaryFixed = 0;  % fixed boundary doesn't allow for periodic jumps
 
 % cells parameters
-param.rstiff   = 1.0;             % stiffness factor
+param.rstiff   = 0.1;             % stiffness factor
 param.eta      = 1.0;             % vertex viscosity
 
 % stretchting parameters
@@ -22,7 +22,7 @@ param.ApplyStretchX = false;            % apply stretch in the x direction
 param.BoxIncompressibility = true;      % conserve area when applying stretch
 param.Lx0 = param.Lx;
 param.Ly0 = param.Ly;
-param.cellIDstoTrack = 0;   % tracking neighbouring cells
+param.cellIstoTrack = 0;   % tracking neighbouring cells
 
 % contraction parameters
 param.multFactorForContraction = 1;

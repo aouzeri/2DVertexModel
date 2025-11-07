@@ -121,7 +121,6 @@ celldata.A                      = getCellAreas(celldata,param);
 celldata.Ainit                  = celldata.A; % Initial cell areas
 celldata.verttocell             = getVertexToCellIDMap(celldata.nMasterVertices,nCells,celldata.connec);
 
-
 %% Obtaing boundary nodes
 % Creating a map of the slaves (images) that have been removed
 idxA = ismembertol(Vsubset,masterVsubset, 1e-6, 'ByRows', true);

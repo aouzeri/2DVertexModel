@@ -51,6 +51,7 @@ parameters;
 
 %% 3 - Generating mesh
 celldata = genVoronoiTessellation(param);
+param.A0 = mean(celldata.Ainit); % target area took as the average of all cells at the beginning 
 
 % plotting initial state
 figure(2)

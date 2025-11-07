@@ -6,7 +6,7 @@ for cellID = 1:celldata.nCells
     
     Acell  = celldata.A(cellID);
     Pcell  = celldata.P(cellID);
-    A0     = celldata.A0;
+    A0     = param.A0;
     p0     = param.p0;
     rstiff = param.rstiff;
     
