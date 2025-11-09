@@ -1,7 +1,6 @@
 %% Plotting evolution of tissue
 
-nFrames = 50;
-mov(1:nFrames) = struct('cdata',[], 'colormap',[]);
+mov(1:param.nFrames) = struct('cdata',[], 'colormap',[]);
 k = 1;
 
 writerObj = VideoWriter(param.case);
@@ -13,7 +12,7 @@ for tstep = 1:param.Nsteps
     applyStretchX;
 
     % Plotting every nVisualisation steps
-    if mod(tstep,ceil(param.Nsteps/nFrames)) == 0
+    if mod(tstep,ceil(param.Nsteps/param.nFrames)) == 0
         figure(4)
         hold on
         fprintf(1,'Plotting time step %d\n',tstep);

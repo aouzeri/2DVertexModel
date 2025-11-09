@@ -52,12 +52,13 @@ for cellID = 1:celldata.nCells
         % Derivative of the area with next vertex and the pericenter (2 by 1)
         dA    = getAreaDerivative(vertexcoords,vertices,currVert,nextVert,prevVert);
         
-        if ismember(cellID,param.cellIDstoTrack) && strcmp("propulsion",param.case)
+        [LiA, LiB] = ismember(cellID,param.cellIDstoTrack);
+        if LiA && strcmp("propulsion",param.case)
             Theta =  param.meanPropulsionAngle(1) + randn(1);
             polarityVector = [cos(Theta),sin(Theta)];
             % distribute the force among all vertices (the greater the
             % number of vertices, the lower the force per vertices)
-            selfPropulsionForce = param.vel0 * polarityVector/length(celldata.connec{cellID});
+            selfPropulsionForce = param.vel0(LiB) * polarityVector/length(celldata.connec{cellID});
         else
             selfPropulsionForce = [0, 0];
         end

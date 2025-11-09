@@ -6,13 +6,15 @@ param.T1_TOL   = 0.05;      % tolerance to perform a T1 swap
 param.nT1      = 0;         % to store the number of T1 transitions occured
 
 % simulation time parameters
-param.deltat   = 0.01;     % initial timestep
+param.deltat   = 0.01;      % initial timestep
 param.Tsim     = 0;         % simulation time
-param.Nsteps   = 100;       % simulation time
+param.Nsteps   = 20000;     % simulation time
 param.isBoundaryFixed = 0;  % fixed boundary doesn't allow for periodic jumps
+param.nFrames = 250;        % number of frames for movie                
+
 
 % cells parameters
-param.rstiff   = 0.1;             % stiffness factor
+param.rstiff   = 0.5;             % stiffness factor
 param.eta      = 1.0;             % vertex viscosity
 
 % stretchting parameters
@@ -30,8 +32,8 @@ param.cellIDtoContract = [];
 
 %% Mechanical stimulus
 if strcmp(param.case,'propulsion')
-    param.cellIDstoTrack = 12;
-    param.vel0     = 5.0;               % velocity of self-propulsion
+    param.cellIDstoTrack = [50,70];
+    param.vel0     = [3.0,-3.0];               % velocity of self-propulsion
     param.meanPropulsionAngle = [pi/2,3*pi/2];
 elseif strcmp(param.case,'contraction')
     param.cellIDstoTrack = [67 66 50 122 79 17 35 20 102 33 31 144 ...
@@ -51,7 +53,7 @@ end
 % threhsold between solid and fluid phase is at ~ 3.8 (Bi et al. 2015)
 if strcmp(Tissue_state,'fluid')
     fprintf(1,'Tissue is now %s\n',param.case);
-    param.p0 = 3.92; % below 4 for cleaner simulation results
+    param.p0 = 4.0; % below 4 for cleaner simulation results
     parm.multFactorForContraction = min(param.multFactorForContraction,1.5);
 elseif strcmp(Tissue_state,'solid')
     param.p0 = 3;
