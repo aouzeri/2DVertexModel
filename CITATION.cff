@@ -1,0 +1,35 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  2D vertex model for epithelial tissue mechanics with
+  self-propulsion, contraction and stretching
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Adam
+    family-names: Ouzeri
+    email: adam.ouzeri@sorbonne-universite.fr
+    affiliation: Sorbonne Université
+    orcid: 'https://orcid.org/0009-0004-1259-2354'
+  - given-names: Sohan
+    family-names: Kale
+    email: kale@vt.edu
+    affiliation: Virginia Tech
+    orcid: 'https://orcid.org/0000-0002-9985-3526'
+repository-code: 'https://github.com/aouzeri/2DVertexModel'
+abstract: >-
+  This script simulates a simple vertex model for describing
+  the mechanics of epithelial tissues embedded in a viscous
+  medium. The dynamics of each vertex is governed by the
+  gradient of an energy function and nodal dissipation
+  forces. The models allows for tissue fluidization, T1
+  topological transitions, cellular contraction, stretching
+  of the tissue and self-propulsion of individual cells.
+  Such script can serve as an entry point and a pedagogical
+  tool to understand vertex modelling in the context of
+  dynamic packing and rearrangement of planar epithelia.
+license: GPL-3.0+

@@ -1,5 +1,5 @@
 function totalenergy = getTissueEnergy(celldata,param)
-%% GETTİSSUEENERGY: returns total energy of the collection of cells
+%% GETTISSUEENERGY: returns total energy of the collection of cells
 
 totalenergy = 0;
 for cellID = 1:celldata.nCells
@@ -10,8 +10,8 @@ for cellID = 1:celldata.nCells
     p0     = param.p0;
     rstiff = param.rstiff;
     
-    if cellID == param.cellIDtoContract
-        rstiff = rstiff/param.multFactorForContraction;
+    if cellID == param.cellIDstoTrack
+        A0 = A0*param.multFactorForContraction;
     end
     
     % Energy functional

@@ -13,13 +13,14 @@ for tstep = 1:param.Nsteps
 
     % Plotting every nVisualisation steps
     if mod(tstep,ceil(param.Nsteps/param.nFrames)) == 0
-        figure(4)
+        f = figure(4);
+        set(f,'Visible', 'off')
         hold on
-        fprintf(1,'Plotting time step %d\n',tstep);
+        fprintf(1,'Saving step %d\n',tstep);
         plotTissue(celldata.nCells,Coordinates(:,2*tstep-1:2*tstep),Connectivity(:,tstep),param);
         rectangle('Position',[0 0 param.Lx param.Ly]);
         mov(k) = getframe(gcf);
-        drawnow;
+        % drawnow;
         writeVideo(writerObj,mov(k));
         hold off
         close(4)

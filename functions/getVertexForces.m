@@ -19,13 +19,10 @@ for cellID = 1:celldata.nCells
     Ly                = param.Ly;
     vertices       = celldata.connec{cellID};
     fcell          = zeros(size(celldata.f));
-    
-    for i = 1:length(param.cellIDtoContract)
-        if cellID == param.cellIDtoContract(i) && tstep > 55
-            p0 = p0*param.multFactorForContraction;
-        end
+
+    if ismember(cellID,param.cellIDstoTrack) && tstep > 70
+        A0 = A0*param.multFactorForContraction;
     end
-    
     
     % Modifying vertex coordinates acocuntin for peridicity
     vertexcoords = modifyVerticesForPeriodicity(vertexcoordsold,vertices,Lx,Ly);

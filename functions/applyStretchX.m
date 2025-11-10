@@ -1,4 +1,3 @@
-
 %% Applying stretching
 deltaStretch = floor(0.5*param.Nsteps);
 

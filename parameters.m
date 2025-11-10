@@ -8,14 +8,13 @@ param.nT1      = 0;         % to store the number of T1 transitions occured
 % simulation time parameters
 param.deltat   = 0.01;      % initial timestep
 param.Tsim     = 0;         % simulation time
-param.Nsteps   = 20000;     % simulation time
+param.Nsteps   = 200;     % simulation time
 param.isBoundaryFixed = 0;  % fixed boundary doesn't allow for periodic jumps
-param.nFrames = 250;        % number of frames for movie                
-
+param.nFrames = 200;        % number of frames for movie 
 
 % cells parameters
 param.rstiff   = 0.5;             % stiffness factor
-param.eta      = 1.0;             % vertex viscosity
+param.eta      = 0.5;             % vertex viscosity
 
 % stretchting parameters
 param.StretchAtStep = 100000;
@@ -26,25 +25,22 @@ param.Lx0 = param.Lx;
 param.Ly0 = param.Ly;
 param.cellIstoTrack = 0;   % tracking neighbouring cells
 
-% contraction parameters
+% contraction parameters (no contraction by default)
 param.multFactorForContraction = 1;
-param.cellIDtoContract = [];
 
 %% Mechanical stimulus
 if strcmp(param.case,'propulsion')
-    param.cellIDstoTrack = [50,70];
+    param.cellIDstoTrack = randperm(celldata.nCells,2);
     param.vel0     = [3.0,-3.0];               % velocity of self-propulsion
     param.meanPropulsionAngle = [pi/2,3*pi/2];
 elseif strcmp(param.case,'contraction')
-    param.cellIDstoTrack = [67 66 50 122 79 17 35 20 102 33 31 144 ...
-        57 59 63 26 104 123 94 64 24 77 32 59 ...
-        57 63 24 81 130 99 37 90 128];   % change specific cell property at a givent time point
-    param.multFactorForContraction = 1; % 0.25
+    param.cellIDstoTrack = randperm(celldata.nCells,ceil(celldata.nCells/10));   % change specific cell property at a givent time point
+    param.multFactorForContraction = 0.5; % 0.25
 elseif strcmp(param.case,'stretching')
     param.StretchAtStep = floor(param.Nsteps/5);
     param.StretchRatio  = 2;
     param.ApplyStretchX = true;             % apply stretch in the x direction
-    param.cellIDstoTrack = [13,33,12,28];   % red coloring cells
+    param.cellIDstoTrack = randperm(celldata.nCells,4);   % red coloring cells
 else
     error('Please choose a given scenario : "propulsion" or "contraction" or "stretching".')
 end
