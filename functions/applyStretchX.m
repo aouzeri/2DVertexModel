@@ -1,5 +1,5 @@
 %% Applying stretching
-deltaStretch = floor(0.5*param.Nsteps);
+deltaStretch = floor(4/5*param.Nsteps);
 
 if param.ApplyStretchX  && tstep - param.StretchAtStep <= deltaStretch
     param.Lx = param.Lx0;
