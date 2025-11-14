@@ -60,12 +60,9 @@ for cellID = 1:celldata.nCells
             selfPropulsionForce = [0, 0];
         end
         
-        
         % Adding contributions from a cell to its vertices
         fcell(currVert,:) = fcell(currVert,:) - ...
-            2.0 * (Acell/A0 - 1) * dA/A0 - 2.0/rstiff * (Pcell/sqrt(A0) - p0) * dPeri /sqrt(A0) + selfPropulsionForce;
-        
-        
+            2.0 * (Acell/A0 - 1) * dA/A0 - 2.0/rstiff * (Pcell/sqrt(A0) - p0) * dPeri /sqrt(A0) + selfPropulsionForce;        
     end
     
     % Implementing fixed boundary

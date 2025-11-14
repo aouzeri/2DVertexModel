@@ -2,10 +2,10 @@ function [coordinates, connectivity, edgedata,verttocell, T1flagVec,T1relaxstepc
 %% checkT1transitions: Checks for and performs a T1 transition
 nT1 = param.nT1;
 
-% Looping over each edge of each cell
+% Looping over each edge of each cell to perform T1 transition
 for cellID = 1:nCells
     verticesmat = connectivity{cellID};
-    edgelenmat  = edgedata{cellID};
+    edgelenmat  = edgedata{cellID}; 
     for j = 1:length(verticesmat)
         if edgelenmat(j) < param.T1_TOL && T1flagVec(j) == 0
             vertID1 = verticesmat(j);
@@ -25,18 +25,50 @@ for cellID = 1:nCells
             fprintf(1,'-------------\n');
             nT1 = nT1 + 1;
             T1flagVec(j) = 1;
-        else
-            % Do nothing
+        else 
+            % do nothing
         end
     end
 end
 
-% Updating 
+% Checking that cells are not intercalating
+for cellID = 1:nCells
+    verticesmat = connectivity{cellID};
+    for j = 1:length(verticesmat)
+        vertID1 = verticesmat(j);
+        if j < length(verticesmat)
+            vertID2 = verticesmat(j+1);
+        else % Final edge
+            vertID2 = verticesmat(1);
+        end
+        [cellID1, cellID2, cellID3, cellID4] = getT1cellIDs(vertID1, vertID2,  verttocell,connectivity);
+        cellIDs = [cellID1, cellID2, cellID3, cellID4];
+        if cellID1 ~= -1 % Less then 4 surrounding cells
+            for k = 1:length(cellIDs)
+                poly = coordinates(connectivity{cellIDs(k)}, :);
+                if inpolygon(coordinates(vertID1,1), coordinates(vertID1,2), poly(:,1), poly(:,2))
+                    % Display status
+                    fprintf(1,'-------------\nT1 transition performed in \n');
+                    fprintf(1,'V1 = %3d, V2 = %3d\n',vertID1, vertID2);
+                    fprintf(1,'C1 = %3d, C2 = %3d, C3 = %3d, C4 = %3d]\n',cellID1, cellID2, cellID3, cellID4);
+                    fprintf(1,'-------------\n');
+
+                    [coordinates, connectivity, edgedata,verttocell] = performT1swap(cellID1, cellID2, cellID3, cellID4, coordinates, connectivity, edgedata,verttocell, vertID1, vertID2, param);
+                    nT1 = nT1 + 1;
+                end
+            end
+        else
+            %do nothing
+        end
+    end
+end
+
+% Updating
 for i = 1:length(T1flagVec)
     if T1flagVec(i) == 1
         T1relaxstepcountVec(i) = T1relaxstepcountVec(i) + 1;
     end
-    
+
     if T1relaxstepcountVec(i) > param.maxT1relaxsteps
         T1flagVec(i) = 0;
         T1relaxstepcountVec(i) = 0;

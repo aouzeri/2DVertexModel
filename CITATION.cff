@@ -32,4 +32,4 @@ abstract: >-
   Such script can serve as an entry point and a pedagogical
   tool to understand vertex modelling in the context of
   dynamic packing and rearrangement of planar epithelia.
-license: GPL-3.0+
+license: GPL-3.0

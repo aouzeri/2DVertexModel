@@ -1,5 +1,6 @@
 ﻿# 2D vertex model with stretch, propulsion and contraction
-The purpose of the present Matlab code is to simulate the dynamics of planar cohesive sheets of cells using vertex modelling. The model is described in [[1,2,3,4](#References)].
+
+This MATLAB script simulates a simple vertex model for describing the mechanics of epithelial tissues embedded in a viscous medium. The dynamics of each vertex is governed by the gradient of an energy function and nodal dissipation forces. The models allows for tissue fluidization, T1 topological transitions, cellular contraction, tissue stretching and self-propulsion of individual cells. Such script can serve as an entry point and a pedagogical tool to understand vertex modelling in the context of dynamic packing and rearrangement of planar epithelia. The model is described in [[1,2,3,4](#References)].
 
 ## License 
 Distributed under the GNU GENERAL PUBLIC LICENSE. See [LICENSE](LICENSE) for details.
@@ -22,21 +23,24 @@ The folder is organized as follows :
 
 To run a simulation, open and the "vertexmodel.m" file in Matlab.
 
-There are three scenarios available : cells individually moving through the tissue ("propulsion"), cells individually contracting ("contraction"), and the tissue stretching ("stretching").
-For each scenario, the user can choose between a fluid tissue or a solid tissue.
+There are four scenarios available :
+* a default state to visualize tissue fluidity
+* cells individually moving through the tissue ("propulsion")
+* cells individually contracting ("contraction")
+* tissue stretching ("stretching").
+
+For each scenario, the user can choose between a "fluid" tissue or a "rigid" tissue, which depends on the target shape index [[3](#References)].
+
 Simulations parameters can be modified in the "parameters.m" file.
 
-## Data visualisation
+## Outputs and data visualisation
 
 At each timestep, the code saves a frame in a video object to create a movie at the end. The title of the video file corresponds to the scenario.
-
-## Expected outputs
-
 
 
 ## Cite 
 
-You can acknowledge this package in any publication or pedagogical session that relies on it using reference [[2]](#References).
+You can acknowledge this package in any publication or pedagogical session that relies on it using [CITATION.cff](CITATION.cff).
 
 ## References
 

@@ -33,17 +33,18 @@ totalsimtime = tic;
 %% 1 - Initialising the parameters
 
 %%% Choose tissue size
-param.Lx       = 20;                 % box length in x
-param.Ly       = 20;                 % box length in y
+param.Lx       = 10;                 % box length in x
+param.Ly       = 10;                 % box length in y
 
 %%% Choose tissue fluidity (comment unwanted)
-% Tissue_state = 'fluid';
-Tissue_state = 'solid';
+Tissue_state = 'fluid';
+% Tissue_state = 'solid';
 
 %%% Choose a scenario (comment unwanted)
+param.case = "default"; % self-propelled cell
 % param.case = "propulsion"; % self-propelled cell
 % param.case = "contraction"; % contracting a single cell
-param.case = "stretching"; % stretching tissue
+% param.case = "stretching"; % stretching tissue
 
 %% 2 - Generating mesh
 celldata = genVoronoiTessellation(param);
@@ -64,6 +65,7 @@ timemat   = zeros(param.Nsteps,1);
 T1flagVec    = zeros(celldata.nMasterVertices,1);
 T1relaxstepcountVec = zeros(size(T1flagVec));
 
+% for plotting purposes
 Coordinates = zeros(celldata.nMasterVertices,2*param.Nsteps);
 Connectivity = cell(celldata.nCells,param.Nsteps);
 
