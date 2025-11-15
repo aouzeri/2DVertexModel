@@ -44,7 +44,7 @@ You can acknowledge this package in any publication or pedagogical session that 
 
 ## References
 
-[1] Farhadifar et al. 2007 (https://doi.org/10.1016/j.cub.2007.11.049)
-[2] Staple et al. 2010 (https://doi.org/10.1140/epje/i2010-10677-0)
-[3] Bi et al. 2015 (https://doi.org/10.1038/nphys3471)
+[1] Farhadifar et al. 2007 (https://doi.org/10.1016/j.cub.2007.11.049) \
+[2] Staple et al. 2010 (https://doi.org/10.1140/epje/i2010-10677-0) \
+[3] Bi et al. 2015 (https://doi.org/10.1038/nphys3471) \
 [4] Fletcher et al. 2014 (http://dx.doi.org/10.1016/j.bpj.2013.11.4498)
