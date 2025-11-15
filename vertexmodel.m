@@ -91,7 +91,7 @@ for tstep = 1:param.Nsteps
     %% Check for T1 transitions and update
     % After performing the T1-swap, edge is relaxed for maxT1relaxsteps
     % steps while keeping all other potential T1-swaps on hold
-    [celldata.r,celldata.connec,celldata.EdgeData,celldata.verttocell, T1flagVec,T1relaxstepcountVec,param.nT1]   = checkT1transitions(celldata.nCells,celldata.r,celldata.connec,celldata.EdgeData,celldata.verttocell,param,T1flagVec,T1relaxstepcountVec);    
+    [celldata.r,celldata.connec,celldata.EdgeData,celldata.verttocell, T1flagVec,T1relaxstepcountVec,param.nT1]   = checkT1transitions(celldata.nCells,celldata.r,celldata.connec,celldata.EdgeData,celldata.verttocell,param,T1flagVec,T1relaxstepcountVec, tstep);    
     
     %% Storing current state for plotting purposes
     Coordinates(:,2*tstep - 1:2*tstep) = celldata.r;

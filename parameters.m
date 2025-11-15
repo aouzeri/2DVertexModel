@@ -10,7 +10,7 @@ param.deltat   = 0.005;      % initial timestep
 param.Tsim     = 0;         % simulation time
 param.Nsteps   = 100;     % simulation time
 param.isBoundaryFixed = 0;  % fixed boundary doesn't allow for periodic jumps
-param.nFrames = ceil(param.Nsteps/5);        % number of frames for movie 
+param.nFrames = ceil(param.Nsteps/2);        % number of frames for movie 
 
 % cells parameters
 param.rstiff   = 1.0;             % stiffness factor
