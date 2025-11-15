@@ -24,7 +24,7 @@ The folder is organized as follows :
 To run a simulation, open and the "vertexmodel.m" file in Matlab.
 
 There are four scenarios available :
-* a default state to visualize tissue fluidity
+* a default state to visualise tissue fluidity
 * cells individually moving through the tissue ("propulsion")
 * cells individually contracting ("contraction")
 * tissue stretching ("stretching").
@@ -40,7 +40,7 @@ At each timestep, the code saves a frame in a video object to create a movie at 
 
 ## Cite 
 
-You can acknowledge this package in any publication or pedagogical session that relies on it using [CITATION.cff](CITATION.cff).
+You can acknowledge this package in any publication or pedagogical session that relies on it by citing the following link https://github.com/aouzeri/2DVertexModel.
 
 ## References
 
