@@ -4,17 +4,18 @@
 param.maxT1relaxsteps = 20;
 param.T1_TOL   = 0.05;      % tolerance to perform a T1 swap
 param.nT1      = 0;         % to store the number of T1 transitions occured
+param.checkIntercalationflag      = false;         % check for cell intercalation and apply T1 swaps
 
 % simulation time parameters
 param.deltat   = 0.005;      % initial timestep
 param.Tsim     = 0;         % simulation time
-param.Nsteps   = 100;     % simulation time
+param.Nsteps   = 200;     % simulation time
 param.isBoundaryFixed = 0;  % fixed boundary doesn't allow for periodic jumps
 param.nFrames = ceil(param.Nsteps/2);        % number of frames for movie 
 
 % cells parameters
-param.rstiff   = 1.0;             % stiffness factor
-param.eta      = 0.5;             % vertex viscosity
+param.rstiff   = 0.1;             % stiffness factor
+param.eta      = 1.0;             % vertex viscosity
 
 % stretchting parameters
 param.StretchAtStep = param.Nsteps + 1; % not stretching by default
@@ -38,7 +39,7 @@ elseif strcmp(param.case,'contraction')
     param.multFactorForContraction = 0.5; % 0.25
 elseif strcmp(param.case,'stretching')
     param.StretchAtStep = floor(param.Nsteps/5);
-    param.StretchRatio  = 3.81;
+    param.StretchRatio  = 3.7;
     param.ApplyStretchX = true;             % apply stretch in the x direction
     param.cellIDstoTrack = randperm(celldata.nCells,celldata.nCells/10);   % red coloring cells
 else

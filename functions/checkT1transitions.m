@@ -25,48 +25,50 @@ for cellID = 1:nCells
             fprintf(1,'-------------\n');
             nT1 = nT1 + 1;
             T1flagVec(verticesmat(j)) = 1;
-        else 
+        else
             % do nothing
         end
     end
 end
 
-% Checking that cells are not intercalating
-[Cnew, Vnew] = getCellDataforPlottingwithoutPeriodicJumps(nCells, coordinates, connectivity, param);
-if mod(tstep,10) == 0
-for cellID = 1:nCells
-    verticesmat = connectivity{cellID};
-    for j = 1:length(verticesmat)
-        vertID1 = verticesmat(j);
-        if j < length(verticesmat)
-            vertID2 = verticesmat(j+1);
-        else % Final edge
-            vertID2 = verticesmat(1);
-        end
-        [cellID1, cellID2, cellID3, cellID4] = getT1cellIDs(vertID1, vertID2,  verttocell,connectivity);
-        cellIDs = [cellID1, cellID2, cellID3, cellID4];
-        if cellID1 ~= -1 % Less then 4 surrounding cells
-            for k = 1:length(cellIDs)
-                poly = Vnew(Cnew{cellIDs(k)}, :);
-                pgon = polyshape(poly(:,1), poly(:,2));
-                [in,on] = inpolygon(coordinates(vertID1,1), coordinates(vertID1,2), poly(:,1), poly(:,2));
-                interior = isinterior(pgon, coordinates(vertID1,1), coordinates(vertID1,2));
-                if interior && in && ~on
-                    % Display status
-                    fprintf(1,'-------------\nT1 swap performed in \n');
-                    fprintf(1,'V1 = %3d, V2 = %3d\n',vertID1, vertID2);
-                    fprintf(1,'C1 = %3d, C2 = %3d, C3 = %3d, C4 = %3d]\n',cellID1, cellID2, cellID3, cellID4);
-                    fprintf(1,'-------------\n');
-                    [coordinates, connectivity, edgedata,verttocell] = performT1swap(cellID1, cellID2, cellID3, cellID4, coordinates, connectivity, edgedata,verttocell, vertID1, vertID2, param);
-                    nT1 = nT1 + 1;
-                    break;
+if param.checkIntercalationflag
+    % Checking that cells are not intercalating
+    [Cnew, Vnew] = getCellDataforPlottingwithoutPeriodicJumps(nCells, coordinates, connectivity, param);
+    if mod(tstep,10) == 0
+        for cellID = 1:nCells
+            verticesmat = connectivity{cellID};
+            for j = 1:length(verticesmat)
+                vertID1 = verticesmat(j);
+                if j < length(verticesmat)
+                    vertID2 = verticesmat(j+1);
+                else % Final edge
+                    vertID2 = verticesmat(1);
+                end
+                [cellID1, cellID2, cellID3, cellID4] = getT1cellIDs(vertID1, vertID2,  verttocell,connectivity);
+                cellIDs = [cellID1, cellID2, cellID3, cellID4];
+                if cellID1 ~= -1 % Less then 4 surrounding cells
+                    for k = 1:length(cellIDs)
+                        poly = Vnew(Cnew{cellIDs(k)}, :);
+                        pgon = polyshape(poly(:,1), poly(:,2));
+                        [in,on] = inpolygon(coordinates(vertID1,1), coordinates(vertID1,2), poly(:,1), poly(:,2));
+                        interior = isinterior(pgon, coordinates(vertID1,1), coordinates(vertID1,2));
+                        if interior && in && ~on
+                            % Display status
+                            fprintf(1,'-------------\nT1 swap performed in \n');
+                            fprintf(1,'V1 = %3d, V2 = %3d\n',vertID1, vertID2);
+                            fprintf(1,'C1 = %3d, C2 = %3d, C3 = %3d, C4 = %3d]\n',cellID1, cellID2, cellID3, cellID4);
+                            fprintf(1,'-------------\n');
+                            [coordinates, connectivity, edgedata,verttocell] = performT1swap(cellID1, cellID2, cellID3, cellID4, coordinates, connectivity, edgedata,verttocell, vertID1, vertID2, param);
+                            nT1 = nT1 + 1;
+                            break;
+                        end
+                    end
+                else
+                    %do nothing
                 end
             end
-        else
-            %do nothing
         end
     end
-end
 end
 
 % Updating

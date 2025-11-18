@@ -33,8 +33,8 @@ totalsimtime = tic;
 %% 1 - Initialising the parameters
 
 %%% Choose tissue size
-param.Lx       = 10;                 % box length in x
-param.Ly       = 10;                 % box length in y
+param.Lx       = 15;                 % box length in x
+param.Ly       = 15;                 % box length in y
 
 %%% Choose tissue fluidity (comment unwanted)
 Tissue_state = 'fluid';
